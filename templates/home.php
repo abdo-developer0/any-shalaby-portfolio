@@ -9,8 +9,8 @@
   	<meta name="author" content="Brad Traversy">
     <title>Hany Shalaby | Welcome</title>
     <link rel="icon" href="img/tree-branch-forest-lush-trees-174d25acc1c9afb2f6e34d045a9d61c0.png">
-    <link rel="stylesheet" href="./bootstrap.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
 
   </head>
   <body>
@@ -26,8 +26,8 @@
               <!-- end of brand -->
 
               <ul>
-                <li class="current"><a href="@url('/')">الصفحة الرئيسية</a></li>
-                <li><a href="@url('login')">تسجيل _الدخول</a></li>
+                <li class="<?php echo url('?page=index') ?>"><a href="@url('/')">الصفحة الرئيسية</a></li>
+                <li><a href="<?php echo url('?page=login') ?>">تسجيل  الدخول</a></li>
               </ul>
             </nav>
             <!-- end of navbar -->
@@ -67,7 +67,7 @@
   <section class="my-5">
     <ul class="d-flex flex-row justify-content-around">
       <li class="text-center">
-        <h1 class="display-1">{{ $visitors }}</h1>
+        <h1 class="display-1"><?php echo $GLOBALS['visitors_counter'] ?></h1>
         <p class="display-4">الزيارات</p>
       </li>
       <li class="text-center">
@@ -152,7 +152,7 @@
         <div class="contact-form">
           <h3 class="text-center">للتواصل</h3>
 
-          <form class="quote" method="post" action="mailer.php">
+          <form class="quote" method="post" action="<?php echo url('?page=sendEmail') ?>">
               <div class="form-group">
                   <label>الاسم</label><br>
                   <input type="text" class="form-control" placeholder="Name" name="name" required>

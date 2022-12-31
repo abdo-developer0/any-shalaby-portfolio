@@ -1,30 +1,23 @@
 <?php
 
-/**
- * require helpers
- * for get usful functions
- */
 
-require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-/**
- * start output buffering for errors
- */
+$website = new URIRouter(__DIR__);
 
-ob_start();
+$GLOBALS['visitors_counter'] = require_once(__DIR__ . '/php/__on_visit.php');
 
-if (route('/') or route('/home')) {
+$website->page('get', 'index', function(URIRouter $router) {
+    $router->loadFile('/templates/home.php');
+});
 
-  $visitors = require_once(__DIR__ . '/__on_visit.php');
-  
-  html_render('home.html', ['visitors' => $visitors]);
-  
-  http_response_code(200);
-  
-} else {
+$website->page('get', 'login', function(URIRouter $router) {
+    $router->loadFile('/templates/login.php');
+});
 
-  html_render('404.html');
+$website->page('post', 'sendEmail', function(URIRouter $router) {
+    $router->loadFile('/php/_send_mail.php');
+});
 
-  http_response_code(404);
 
-}
+$website->run();
